@@ -1,7 +1,7 @@
 /// <reference types="cypress" />
 
 beforeEach(() => {
-  cy.task('clearNock')
+  //cy.clearNock()
 })
 
 it('fetches a random joke', () => {
@@ -11,7 +11,7 @@ it('fetches a random joke', () => {
 
 it('getServerSideProps returns mock', () => {
   const joke = 'Our wedding was so beautiful, even the cake was in tiers.'
-  cy.task('nock', {
+  cy.interceptSSR({
     hostname: 'https://icanhazdadjoke.com',
     method: 'GET',
     path: '/',

@@ -1,10 +1,13 @@
-const nock = require('nock')
-const http = require('http')
-const next = require('next')
+//const nock = require('nock')
+//const nockProxy = require('nock-proxy')
+//const http = require('http')
+//const next = require('next')
+
+//nockProxy(3001)
 
 // start the Next.js server when Cypress starts
 module.exports = async (on, config) => {
-  const app = next({ dev: true })
+  /*const app = next({ dev: true })
   const handleNextRequests = app.getRequestHandler()
   await app.prepare()
 
@@ -22,6 +25,7 @@ module.exports = async (on, config) => {
     })
   })
 
+
   // register handlers for cy.task command
   // https://on.cypress.io/task
   on('task', {
@@ -32,11 +36,11 @@ module.exports = async (on, config) => {
       return null
     },
 
-    async nock({ hostname, method, path, statusCode, body }) {
+    async nock({ hostname, method, path, statusCode, body, port }) {
       nock.activate()
 
       console.log('nock will: %s %s%s respond with %d %o',
-        method, hostname, path, statusCode, body)
+        method, hostname, path, statusCode, body, port)
 
       // add one-time network stub like
       // nock('https://icanhazdadjoke.com').get('/').reply(200, ...)
@@ -46,6 +50,7 @@ module.exports = async (on, config) => {
       return null
     },
   })
+  */
 
   return config
 }
