@@ -1,7 +1,7 @@
 /// <reference types="cypress" />
 
 beforeEach(() => {
-  //cy.clearNock()
+  cy.clearNock()
 })
 
 it('fetches a random joke', () => {
