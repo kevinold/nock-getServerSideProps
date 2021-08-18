@@ -23,6 +23,7 @@ app.prepare().then(() => {
   server.get("/clearNock", (req, res) => {
     nock.restore()
     nock.cleanAll()
+    nock.activate()
     res.sendStatus(200);
   });
 
