@@ -11,7 +11,7 @@ it('fetches a random joke', () => {
 
 it('getServerSideProps returns mock', () => {
   const joke = 'Our wedding was so beautiful, even the cake was in tiers.'
-  cy.interceptSSR({
+  cy.mockSSR({
     hostname: 'https://icanhazdadjoke.com',
     method: 'GET',
     path: '/',
