@@ -13,21 +13,27 @@ app.prepare().then(() => {
 
   server.use(express.json());
 
-  server.post("/nock", (req, res) => {
+  server.post("/mock", (req, res) => {
+    nock.restore()
+    nock.cleanAll()
+    nock.activate()
     const { hostname, method, path, statusCode, body } = req.body
     lcMethod = method.toLowerCase()
     nock(hostname)[lcMethod](path).reply(statusCode, body)
     res.sendStatus(200);
   });
 
-  server.get("/clearNock", (req, res) => {
+  server.get('/clearNock', (req, res) => {
     nock.restore()
     nock.cleanAll()
     nock.activate()
     res.sendStatus(200);
-  });
+  })
 
   server.get('*', (req, res) => {
+    nock.restore()
+    nock.cleanAll()
+    nock.activate()
     return handle(req, res)
   })
 
