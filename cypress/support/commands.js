@@ -8,5 +8,5 @@ Cypress.Commands.add("mockSSR", (payload) => {
 })
 
 Cypress.Commands.add("clearNock", () => {
-    cy.request("/clearNock")
+    cy.request("/__cypress_clear_mock")
 })
