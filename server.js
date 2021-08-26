@@ -8,12 +8,18 @@ const app = next({ dev })
 const handle = app.getRequestHandler()
 const nock = require('nock')
 
+// export small express middleware (connect middleware)
+// exporting __cypress_server_mock 
+// server.use(cypressMockMiddleware(configOpts))
+
+// write nock in a way where it could be mocked once or indefinitely triggered by a flag
+
 app.prepare().then(() => {
   const server = express()
 
   server.use(express.json());
 
-  server.post("/mock", (req, res) => {
+  server.post("/__cypress_server_mock", (req, res) => {
     //nock.restore()
     //nock.cleanAll()
     //nock.activate()
@@ -25,9 +31,9 @@ app.prepare().then(() => {
   });
 
   server.get('/clearNock', (req, res) => {
-    // nock.restore()
-    // nock.cleanAll()
-    // nock.activate()
+    nock.restore()
+    nock.cleanAll()
+    nock.activate()
     res.sendStatus(200);
   })
 

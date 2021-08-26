@@ -1,6 +1,6 @@
 
 Cypress.Commands.add("mockSSR", (payload) => {
-    const endpoint = Cypress.env("SSR_ENDPOINT") || "/mock"
+    const endpoint = "/__cypress_server_mock"
     cy.request('POST', endpoint, payload)
     //.then(() => {
         // throw error and point to @cypress/nextjs-mock-test-server

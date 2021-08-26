@@ -9,7 +9,7 @@ it('fetches a random joke', () => {
   cy.get('[data-cy=joke]').should('not.be.empty')
 })
 
-it.only('getServerSideProps returns mock', () => {
+it('getServerSideProps returns mock', () => {
   const joke = 'Our wedding was so beautiful, even the cake was in tiers.'
   cy.mockSSR({
     hostname: 'https://icanhazdadjoke.com',
