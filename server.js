@@ -1,13 +1,13 @@
 // server.js
 const express = require('express')
 const next = require('next')
-const connect = require('connect')
 
 const port = parseInt(process.env.PORT, 10) || 3000
 const dev = process.env.NODE_ENV !== 'production'
 const app = next({ dev })
 const handle = app.getRequestHandler()
-const nock = require('nock')
+
+const { cypressMockMiddleware } = require('@cypress/mock-ssr')
 
 // export small express middleware (connect middleware)
 // exporting __cypress_server_mock 
@@ -15,6 +15,7 @@ const nock = require('nock')
 
 // write nock in a way where it could be mocked once or indefinitely triggered by a flag
 
+/*
 const cypressMockMiddleware = connect();
 
 cypressMockMiddleware.use('/__cypress_server_mock', function cypressServerMock(req, res) {
@@ -41,6 +42,7 @@ cypressMockMiddleware.use('/__cypress_clear_mocks', function cypressClearServerM
   nock.activate()
   res.sendStatus(200);
 })
+*/
 
 app.prepare().then(() => {
   const server = express()
