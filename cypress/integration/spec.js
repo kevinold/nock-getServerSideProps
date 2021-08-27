@@ -1,7 +1,7 @@
 /// <reference types="cypress" />
 
 beforeEach(() => {
-  cy.clearNock()
+  cy.clearSSRMocks()
 })
 
 it('fetches a random joke', () => {
@@ -22,7 +22,20 @@ it('getServerSideProps returns mock', () => {
       status: 200
     }
   })
+
+  const title = "This is the best blog post!!"
+  cy.mockSSR({
+    hostname: 'https://jsonplaceholder.typicode.com',
+    method: 'GET',
+    path: '/posts/1',
+    statusCode: 200,
+    body: {
+      id: 1,
+      title,
+      status: 200
+    }
+  })
   cy.visit('/')
   // nock has worked!
-  cy.contains('[data-cy=joke]', joke)
+  cy.contains('[data-cy=post]', title)
 })
