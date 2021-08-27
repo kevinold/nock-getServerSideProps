@@ -15,9 +15,9 @@ const nock = require('nock')
 
 // write nock in a way where it could be mocked once or indefinitely triggered by a flag
 
-const connectApp = connect();
+const cypressMockMiddleware = connect();
 
-connectApp.use('/__cypress_server_mock', function cypressServerMock(req, res) {
+cypressMockMiddleware.use('/__cypress_server_mock', function cypressServerMock(req, res) {
   const chunks = []
 
   req.on("data", (chunk) => {
@@ -35,7 +35,7 @@ connectApp.use('/__cypress_server_mock', function cypressServerMock(req, res) {
   res.sendStatus(200);
 });
 
-connectApp.use('/__cypress_clear_mock', function cypressClearServerMock(req, res) {
+cypressMockMiddleware.use('/__cypress_clear_mocks', function cypressClearServerMock(req, res) {
   nock.restore()
   nock.cleanAll()
   nock.activate()
@@ -45,9 +45,9 @@ connectApp.use('/__cypress_clear_mock', function cypressClearServerMock(req, res
 app.prepare().then(() => {
   const server = express()
 
-  server.use(connectApp);
+  server.use(cypressMockMiddleware);
 
-  server.get('*', (req, res) => {
+  server.get("*", (req, res) => {
     return handle(req, res)
   })
 
