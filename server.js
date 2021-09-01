@@ -9,41 +9,6 @@ const handle = app.getRequestHandler()
 
 const { cypressMockMiddleware } = require('@cypress/mock-ssr')
 
-// export small express middleware (connect middleware)
-// exporting __cypress_server_mock 
-// server.use(cypressMockMiddleware(configOpts))
-
-// write nock in a way where it could be mocked once or indefinitely triggered by a flag
-
-/*
-const cypressMockMiddleware = connect();
-
-cypressMockMiddleware.use('/__cypress_server_mock', function cypressServerMock(req, res) {
-  const chunks = []
-
-  req.on("data", (chunk) => {
-    chunks.push(chunk)
-  });
-
-  req.on("end", () => {
-    const reqBody = JSON.parse(Buffer.concat(chunks).toString());
-    console.log('reqBody', reqBody)
-
-    const { hostname, method, path, statusCode, body } = reqBody
-    lcMethod = method.toLowerCase()
-    nock(hostname)[lcMethod](path).reply(statusCode, body)
-  });
-  res.sendStatus(200);
-});
-
-cypressMockMiddleware.use('/__cypress_clear_mocks', function cypressClearServerMock(req, res) {
-  nock.restore()
-  nock.cleanAll()
-  nock.activate()
-  res.sendStatus(200);
-})
-*/
-
 app.prepare().then(() => {
   const server = express()
 
