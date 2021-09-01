@@ -1,9 +1,5 @@
 /// <reference types="cypress" />
 
-beforeEach(() => {
-  cy.clearSSRMocks()
-})
-
 it('fetches a random joke', () => {
   cy.visit('/')
   cy.get('[data-cy=joke]').should('not.be.empty')
