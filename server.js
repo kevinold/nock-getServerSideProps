@@ -12,7 +12,7 @@ const { cypressMockMiddleware } = require('@cypress/mock-ssr')
 app.prepare().then(() => {
   const server = express()
 
-  server.use(cypressMockMiddleware);
+  server.use(cypressMockMiddleware());
 
   server.get("*", (req, res) => {
     return handle(req, res)
