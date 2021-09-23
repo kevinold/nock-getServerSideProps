@@ -18,6 +18,7 @@
     "react-dom": "17.0.2"
   },
   "devDependencies": {
+    "@cypress/mock-ssr": "https://github.com/cypress-io/cypress-mock-ssr",
     "@cypress/react": "^5.9.3",
     "@cypress/webpack-dev-server": "^1.4.0",
     "cypress": "^8.2.0",
